@@ -1,0 +1,127 @@
+[
+  {
+    "id": "transport_candidate",
+    "name": "交通出行候选",
+    "appId": null,
+    "path": null,
+    "shortLink": null,
+    "category": "transport",
+    "capabilities": ["transport_search"],
+    "supportedTasks": ["transport"],
+    "targetUsers": ["organizer", "family"],
+    "geographicScope": ["china"],
+    "requiredInputs": ["date", "origins", "destination", "participants"],
+    "expectedOutputs": ["serviceName", "startsAt", "endsAt", "price", "location"],
+    "handoffMode": "manual_capture",
+    "verification": {
+      "status": "pending",
+      "lastCheckedAt": null,
+      "checkedOnDevice": false,
+      "source": "phase0_pending"
+    },
+    "fallback": {
+      "searchPhrase": "查询跨城交通",
+      "manualCaptureEnabled": true
+    }
+  },
+  {
+    "id": "lodging_candidate",
+    "name": "住宿服务候选",
+    "appId": null,
+    "path": null,
+    "shortLink": null,
+    "category": "lodging",
+    "capabilities": ["lodging_search"],
+    "supportedTasks": ["lodging"],
+    "targetUsers": ["organizer", "family"],
+    "geographicScope": ["china"],
+    "requiredInputs": ["date", "destination", "participants"],
+    "expectedOutputs": ["serviceName", "startsAt", "endsAt", "price", "location"],
+    "handoffMode": "manual_capture",
+    "verification": {
+      "status": "pending",
+      "lastCheckedAt": null,
+      "checkedOnDevice": false,
+      "source": "phase0_pending"
+    },
+    "fallback": {
+      "searchPhrase": "查询住宿服务",
+      "manualCaptureEnabled": true
+    }
+  },
+  {
+    "id": "shopping_candidate",
+    "name": "年货采购候选",
+    "appId": null,
+    "path": null,
+    "shortLink": null,
+    "category": "shopping",
+    "capabilities": ["shopping_delivery"],
+    "supportedTasks": ["shopping"],
+    "targetUsers": ["organizer", "family"],
+    "geographicScope": ["china"],
+    "requiredInputs": ["date", "destination"],
+    "expectedOutputs": ["serviceName", "deliveryAt", "price", "location"],
+    "handoffMode": "manual_capture",
+    "verification": {
+      "status": "pending",
+      "lastCheckedAt": null,
+      "checkedOnDevice": false,
+      "source": "phase0_pending"
+    },
+    "fallback": {
+      "searchPhrase": "查询年货配送",
+      "manualCaptureEnabled": true
+    }
+  },
+  {
+    "id": "local_service_candidate",
+    "name": "本地生活候选",
+    "appId": null,
+    "path": null,
+    "shortLink": null,
+    "category": "local_service",
+    "capabilities": ["meal_booking", "local_shopping"],
+    "supportedTasks": ["meal", "coordination"],
+    "targetUsers": ["organizer", "family"],
+    "geographicScope": ["china"],
+    "requiredInputs": ["date", "destination", "participants"],
+    "expectedOutputs": ["serviceName", "startsAt", "price", "location"],
+    "handoffMode": "manual_capture",
+    "verification": {
+      "status": "pending",
+      "lastCheckedAt": null,
+      "checkedOnDevice": false,
+      "source": "phase0_pending"
+    },
+    "fallback": {
+      "searchPhrase": "查询本地生活服务",
+      "manualCaptureEnabled": true
+    }
+  },
+  {
+    "id": "orbit_manual_capture",
+    "name": "Orbit 手动记录",
+    "appId": null,
+    "path": null,
+    "shortLink": null,
+    "category": "orbit",
+    "capabilities": ["manual_capture"],
+    "supportedTasks": ["transport", "lodging", "shopping", "meal", "coordination", "tracking"],
+    "targetUsers": ["organizer", "family", "team"],
+    "geographicScope": ["any"],
+    "requiredInputs": [],
+    "expectedOutputs": ["userConfirmedResult"],
+    "handoffMode": "manual_capture",
+    "verification": {
+      "status": "verified",
+      "lastCheckedAt": "2026-08-31",
+      "checkedOnDevice": false,
+      "source": "internal_capability"
+    },
+    "fallback": {
+      "searchPhrase": null,
+      "manualCaptureEnabled": true
+    }
+  }
+]

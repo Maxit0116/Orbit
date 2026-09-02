@@ -1,0 +1,100 @@
+<view class="screen create-screen">
+  <view class="page-header">
+    <view class="back-button" bindtap="goBack">←</view>
+    <view>
+      <view class="eyebrow">NEW WORKSPACE</view>
+      <view class="page-title">先说说，<br />你要完成什么？</view>
+    </view>
+  </view>
+
+  <view class="input-card card">
+    <view class="input-label">YOUR INTENT</view>
+    <textarea
+      class="intent-input"
+      maxlength="240"
+      auto-focus="{{autoFocus}}"
+      placeholder="例如：春节家人分散在不同城市，想一起回老家过年，帮我安排交通、年货和家庭分工。"
+      value="{{rawInput}}"
+      bindinput="onInput"
+    ></textarea>
+    <view class="input-footer">
+      <text>{{rawInput.length}} / 240</text>
+      <view class="voice-hint">语音输入将在下一阶段接入</view>
+    </view>
+  </view>
+
+  <view class="examples">
+    <view class="examples-label">试试这些目标</view>
+    <view class="chip-row">
+      <button wx:for="{{examples}}" wx:key="id" class="chip" data-example="{{item.text}}" data-scenario="{{item.id}}" bindtap="useExample">{{item.label}}</button>
+    </view>
+  </view>
+
+  <button class="primary-button generate-button" loading="{{loading}}" disabled="{{loading}}" bindtap="generatePlan">
+    <text>{{loading ? '正在理解你的目标…' : '让 Orbit 帮我拆解'}}</text>
+    <text wx:if="{{!loading}}" class="button-arrow">→</text>
+  </button>
+
+  <view wx:if="{{plan}}" class="plan-panel">
+    <view class="panel-heading">
+      <view>
+        <view class="eyebrow">AI UNDERSTANDING</view>
+        <view class="panel-title">这是我对目标的理解</view>
+      </view>
+      <view class="status-pill">可调整</view>
+    </view>
+
+    <view class="intent-summary card">
+      <view class="summary-main">{{plan.title}}</view>
+      <view class="summary-copy">{{plan.goal}}</view>
+      <view class="summary-meta">
+        <view class="meta-item editable-meta"><text class="meta-key">参与者</text><input data-field="peopleLabel" value="{{plan.peopleLabel}}" bindinput="onPlanFieldInput" /></view>
+        <view class="meta-item editable-meta"><text class="meta-key">范围</text><input data-field="locationsLabel" value="{{plan.locationsLabel}}" bindinput="onPlanFieldInput" /></view>
+        <view class="meta-item editable-meta"><text class="meta-key">预算上限</text><input type="digit" data-field="budgetLimit" value="{{plan.budgetLimit}}" placeholder="未设置" bindinput="onPlanFieldInput" /></view>
+      </view>
+    </view>
+
+    <view class="editable-fields card">
+      <view class="input-label">确认理解</view>
+      <view class="edit-row"><text>目标</text><input data-field="goal" value="{{plan.goal}}" bindinput="onPlanFieldInput" /></view>
+      <view class="edit-row"><text>日期</text><input data-field="date" value="{{plan.date}}" placeholder="待确认，不填写不会自动推断" bindinput="onPlanFieldInput" /></view>
+      <view class="edit-row"><text>目的地</text><input data-field="destination" value="{{plan.destination}}" placeholder="待确认" bindinput="onPlanFieldInput" /></view>
+    </view>
+
+    <view class="assumption-box">
+      <view class="assumption-title">需要你确认的假设</view>
+      <view wx:for="{{plan.assumptions}}" wx:key="*this" class="assumption-item">
+        <view class="assumption-dot"></view>
+        <text>{{item}}</text>
+      </view>
+    </view>
+
+    <view class="task-preview">
+      <view class="task-preview-heading">
+        <text>建议先处理这些任务</text>
+        <text class="muted">{{plan.tasks.length}} 项</text>
+      </view>
+      <view wx:for="{{plan.tasks}}" wx:key="title" class="task-preview-row {{item.enabled ? '' : 'is-disabled'}}" data-index="{{index}}" bindtap="togglePlanTask">
+        <view class="task-index">{{index < 9 ? '0' + (index + 1) : index + 1}}</view>
+        <view class="task-preview-info">
+          <input class="task-preview-title" value="{{item.title}}" data-index="{{index}}" bindinput="onPlanTaskTitleInput" catchtap="noop" />
+          <view class="task-preview-type">{{item.enabled ? item.tag : '已移除'}} · {{item.description}}</view>
+        </view>
+        <view class="task-check">{{item.enabled ? '✓' : '+'}}</view>
+      </view>
+    </view>
+    <button class="add-task-button" bindtap="addPlanTask">＋ 添加一个任务</button>
+
+    <view wx:if="{{plan.missingFields && plan.missingFields.length}}" class="assumption-box">
+      <view class="assumption-title">仍待确认</view>
+      <view wx:for="{{plan.missingFields}}" wx:key="*this" class="assumption-item">
+        <view class="assumption-dot"></view>
+        <text>{{item}}</text>
+      </view>
+    </view>
+
+    <button class="secondary-button manual-button" loading="{{revising}}" bindtap="revisePlan">根据最新输入重新理解</button>
+    <button class="primary-button confirm-button" bindtap="confirmPlan">确认，创建任务空间</button>
+    <button class="secondary-button manual-button" bindtap="createManualWorkspace">放弃 AI 理解，手动创建</button>
+  </view>
+</view>

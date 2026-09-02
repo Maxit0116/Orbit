@@ -1,0 +1,90 @@
+<view class="screen home-screen">
+  <view class="topline">
+    <view class="brand-mark">O</view>
+    <view>
+      <view class="brand-name">ORBIT</view>
+      <view class="brand-subtitle">任务，从这里开始成形</view>
+    </view>
+    <view class="mode-pill">{{mockMode ? 'MOCK MODE' : 'CLOUD MODE'}}</view>
+  </view>
+
+  <view class="hero">
+    <view class="eyebrow">TASK WORKSPACE</view>
+    <view class="hero-title">把“要做的事”<br />变成一个空间。</view>
+    <view class="hero-copy">不用先想小程序名称。告诉 Orbit 你的目标，我们帮你拆开任务、连上工具，并记住每个决定。</view>
+    <button class="primary-button hero-button" bindtap="openCreate">
+      <text>创建一个任务空间</text>
+      <text class="button-arrow">→</text>
+    </button>
+  </view>
+
+  <view class="section-heading">
+    <view>
+      <view class="section-title">我的 Workspace</view>
+      <view class="section-caption">进行中与最近更新</view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeWorkspaces.length}}" class="workspace-list">
+    <view wx:for="{{activeWorkspaces}}" wx:key="workspaceId" class="workspace-card card" data-id="{{item.workspaceId}}" bindtap="openWorkspace">
+      <view class="workspace-card-top">
+        <view class="space-icon">团</view>
+        <view class="status-pill">{{item.progress}}%</view>
+      </view>
+      <view class="workspace-card-title">{{item.title}}</view>
+      <view class="workspace-card-goal">{{item.goal}}</view>
+      <view class="workspace-card-footer">
+        <text>{{item.doneCount}} / {{item.taskCount}} 个任务完成</text>
+        <text class="workspace-link">进入空间 →</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{workspace.title}}" class="workspace-card card" bindtap="openWorkspace">
+    <view class="workspace-card-top">
+      <view class="space-icon">团</view>
+      <view class="status-pill warning">最近打开</view>
+    </view>
+    <view class="workspace-card-title">{{workspace.title}}</view>
+    <view class="workspace-card-goal">{{workspace.goal}}</view>
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{progress}}%;"></view>
+    </view>
+    <view class="workspace-card-footer">
+      <text>{{doneCount}} / {{taskCount}} 个任务完成</text>
+      <text class="workspace-link">进入空间 →</text>
+    </view>
+  </view>
+
+  <view wx:else class="empty-card card">
+    <view class="workspace-card-goal">还没有任务空间，从下面选一个目标开始。</view>
+  </view>
+
+  <view wx:if="{{completedWorkspaces.length}}" class="section-heading examples-heading">
+    <view>
+      <view class="section-title">已完成</view>
+      <view class="section-caption">{{completedWorkspaces.length}} 个空间</view>
+    </view>
+  </view>
+  <view wx:if="{{completedWorkspaces.length}}" class="workspace-list">
+    <view wx:for="{{completedWorkspaces}}" wx:key="workspaceId" class="workspace-card card" data-id="{{item.workspaceId}}" bindtap="openWorkspace">
+      <view class="workspace-card-title">{{item.title}}</view>
+      <view class="workspace-card-goal">{{item.goal}}</view>
+    </view>
+  </view>
+
+  <view class="section-heading examples-heading">
+    <view>
+      <view class="section-title">从一个目标开始</view>
+      <view class="section-caption">场景只是入口，空间可以承载任何任务</view>
+    </view>
+  </view>
+  <view class="example-grid">
+    <button wx:for="{{examples}}" wx:key="id" class="example-card card" data-scenario="{{item.id}}" bindtap="createFromExample">
+      <view class="example-icon {{item.tone}}">{{item.mark}}</view>
+      <view class="example-title">{{item.title}}</view>
+      <view class="example-copy">{{item.copy}}</view>
+      <view class="example-arrow">↗</view>
+    </button>
+  </view>
+</view>

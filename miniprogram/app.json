@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/create/create",
+    "pages/workspace/workspace"
+  ],
+  "window": {
+    "navigationBarTitleText": "Orbit",
+    "navigationBarBackgroundColor": "#F5F7F2",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F7F2",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

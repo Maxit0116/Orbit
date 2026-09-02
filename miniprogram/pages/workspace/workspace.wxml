@@ -1,0 +1,217 @@
+<view class="screen workspace-screen">
+  <view wx:if="{{offline}}" class="offline-banner">网络不可用，显示最近快照</view>
+  <view class="workspace-header">
+    <view class="back-button" bindtap="goBack">←</view>
+    <view class="header-context">
+      <view class="eyebrow">YOUR WORKSPACE</view>
+    <view class="header-status"><view class="live-dot"></view>{{syncLabel}}</view>
+    </view>
+    <button class="share-button" open-type="share">分享</button>
+  </view>
+
+  <view class="workspace-intro">
+    <view class="workspace-title">{{workspace.title}}</view>
+    <view class="workspace-goal">{{workspace.goal}}</view>
+    <view class="workspace-meta">
+      <text>{{workspace.peopleLabel}}</text>
+      <text class="meta-separator">·</text>
+      <text>{{workspace.locationsLabel}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{showRisk}}" class="risk-card">
+    <view class="risk-icon">!</view>
+    <view class="risk-content">
+      <view class="risk-title">{{workspace.guidance.title}}</view>
+      <view class="risk-copy">{{workspace.guidance.text}}</view>
+      <view class="risk-meta" wx:if="{{workspace.guidance.adapter}}">来源：{{workspace.guidance.adapter === 'rule' ? '规则引擎' : workspace.guidance.adapter}}</view>
+      <view class="risk-actions">
+        <view class="risk-link" bindtap="showGuidance">查看依据 →</view>
+        <button wx:if="{{guidanceStatus === 'active'}}" class="guidance-btn accept" bindtap="acceptGuidance">采纳</button>
+        <button wx:if="{{guidanceStatus === 'active'}}" class="guidance-btn dismiss" bindtap="dismissGuidance">忽略</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{members.length}}" class="members-card card">
+    <view class="eyebrow">MEMBERS</view>
+    <view class="members-row">
+      <view wx:for="{{members}}" wx:key="userId" class="member-chip {{item.isMe ? 'member-me' : ''}}">
+        <text class="member-name">{{item.nickname}}</text>
+        <text class="member-role">{{item.role === 'owner' ? '创建者' : '成员'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="next-action card">
+    <view class="overview-label">NEXT ACTION</view>
+    <view class="next-action-text">{{nextAction}}</view>
+  </view>
+
+  <view class="overview-grid">
+    <view class="overview-card card progress-card">
+      <view class="overview-label">完成进度</view>
+      <view class="progress-number">{{progress}}<text>%</text></view>
+      <view class="progress-track">
+        <view class="progress-fill" style="width: {{progress}}%;"></view>
+      </view>
+      <view class="overview-note">{{doneCount}} / {{taskCount}} 个任务</view>
+    </view>
+    <view class="overview-card card">
+      <view class="overview-label">已确认预算</view>
+      <view class="money-number">¥{{budgetUsed}}</view>
+      <view class="budget-limit">上限 ¥{{workspace.budgetLimit}}</view>
+      <view class="budget-meter"><view class="budget-meter-fill" style="width: {{budgetPercent}}%;"></view></view>
+    </view>
+  </view>
+
+  <view class="section-heading tasks-heading">
+    <view>
+      <view class="eyebrow">WORKFLOW</view>
+      <view class="section-title">任务进度</view>
+    </view>
+    <view class="tasks-heading-actions">
+      <text class="section-action revision-link" bindtap="openPlanRevision">修订计划</text>
+      <text class="section-action">{{openCount}} 项待处理</text>
+    </view>
+  </view>
+
+  <view class="task-list">
+    <view wx:for="{{workspace.tasks}}" wx:key="id" class="task-card card {{item.status === 'done' ? 'task-done' : ''}}">
+      <view class="task-topline">
+        <button class="task-checkbox {{item.status === 'done' ? 'checked' : ''}}" data-id="{{item.id}}" bindtap="toggleTask">{{item.status === 'done' ? '✓' : ''}}</button>
+        <view class="task-title-wrap">
+          <view class="task-title">{{item.title}}</view>
+          <view class="task-owner" data-id="{{item.id}}" bindtap="editOwner">{{item.tag}} · {{item.owner}} · 改负责人</view>
+        </view>
+        <view class="task-status">{{item.status === 'done' ? '已完成' : '待处理'}}</view>
+      </view>
+      <view class="task-description">{{item.description}}</view>
+      <view class="task-tool-row" wx:if="{{item.tools && item.tools[0]}}">
+        <view class="tool-mark">{{item.tools[0].category}}</view>
+        <view class="tool-info">
+          <view class="tool-name">{{item.tools[0].name}}</view>
+        <view class="tool-reason">{{item.tools[0].reason}}</view>
+        <view class="tool-status">{{item.tools[0].verificationStatus === 'verified' ? '已核验入口' : '待核验，仅可手动记录'}}{{item.tools[0].id && item.tools[0].id.indexOf('orbit_demo_') === 0 ? ' · 演示跳转' : ''}}</view>
+        </view>
+      <button class="tool-open" data-id="{{item.id}}" bindtap="openTool">{{item.tools[0].verificationStatus !== 'verified' ? '手动记录' : (item.tools[0].handoffMode === 'manual_capture' ? '记录' : '打开')}}</button>
+      </view>
+      <view wx:if="{{item.status !== 'done' && item.status !== 'skipped'}}" class="task-actions">
+        <button wx:if="{{!item.ownerId && item.status !== 'done'}}" class="secondary-inline claim" data-id="{{item.id}}" bindtap="claimTask">认领任务</button>
+        <button class="secondary-inline" data-id="{{item.id}}" bindtap="skipTask">跳过</button>
+      </view>
+      <view wx:if="{{item.result && item.status === 'done'}}" class="result-row">
+        <view class="result-check">✓</view>
+        <view><text class="result-label">{{item.result.label}}</text><text class="result-value">{{item.result.value}}</text></view>
+        <text class="result-source">用户确认</text>
+      </view>
+      <button wx:if="{{item.status !== 'done' && item.type === 'service_task'}}" class="result-button" data-id="{{item.id}}" bindtap="confirmResult">完成后，把结果加入 Workspace →</button>
+    </view>
+  </view>
+
+  <view wx:if="{{scheduleItems.length}}" class="section-heading">
+    <view>
+      <view class="eyebrow">SCHEDULE</view>
+      <view class="section-title">时间线</view>
+    </view>
+  </view>
+  <view wx:if="{{scheduleItems.length}}" class="activity-list card">
+    <view wx:for="{{scheduleItems}}" wx:key="time" class="activity-row">
+      <view class="activity-line"></view>
+      <view class="activity-dot"></view>
+      <view class="activity-body">
+        <view class="activity-text">{{item.label}} · {{item.time}}</view>
+        <view class="activity-time">{{item.source}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-heading context-heading">
+    <view>
+      <view class="eyebrow">SHARED CONTEXT</view>
+      <view class="section-title">空间正在记住</view>
+    </view>
+    <text class="section-action">{{workspace.facts.length}} 条事实</text>
+  </view>
+
+  <view class="context-card card">
+    <view wx:for="{{workspace.facts}}" wx:key="key" class="fact-row">
+      <view class="fact-dot"></view>
+      <view class="fact-body">
+        <view class="fact-label">{{item.label}}</view>
+        <view class="fact-value">{{item.displayValue}}</view>
+      </view>
+      <view class="fact-source">{{item.source}}<text wx:if="{{item.confirmedBy}}"> · {{item.confirmedBy}}</text></view>
+    </view>
+    <view class="context-divider"></view>
+    <view class="context-footer">
+      <view class="context-avatar">AI</view>
+      <view class="context-footer-copy">
+        <view class="context-footer-title">Orbit Agent</view>
+        <view class="context-footer-text">会在新的事实进入后，检查时间、预算和任务依赖。</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-heading activity-heading">
+    <view>
+      <view class="eyebrow">ACTIVITY</view>
+      <view class="section-title">最近发生</view>
+    </view>
+  </view>
+  <view class="activity-list card">
+    <view wx:for="{{workspace.events}}" wx:key="id" class="activity-row">
+      <view class="activity-line"></view>
+      <view class="activity-dot"></view>
+      <view class="activity-body">
+        <view class="activity-text">{{item.text}}</view>
+        <view class="activity-time">{{item.at}}</view>
+      </view>
+    </view>
+  </view>
+
+  <button class="secondary-button reset-button" bindtap="resetDemo">重置演示 Workspace</button>
+
+  <view wx:if="{{showResultForm}}" class="result-sheet">
+    <view class="result-sheet-mask" bindtap="closeResultForm"></view>
+    <view class="result-sheet-panel">
+      <view class="sheet-header">
+        <view>
+          <view class="eyebrow">CONFIRM RESULT</view>
+          <view class="sheet-title">把结果加入 Workspace</view>
+        </view>
+        <view class="sheet-close" bindtap="closeResultForm">×</view>
+      </view>
+      <view class="sheet-note">以下内容来自你的确认，不代表 Orbit 读取了第三方小程序页面。</view>
+      <view wx:for="{{resultFields}}" wx:key="field" class="sheet-field">
+        <text>{{item.label}}</text>
+        <input data-field="{{item.field}}" type="{{item.type || 'text'}}" placeholder="{{item.placeholder}}" bindinput="onResultInput" />
+      </view>
+      <button class="primary-button sheet-submit" bindtap="submitResult">确认并写入</button>
+    </view>
+  </view>
+
+  <view wx:if="{{showPlanSheet}}" class="result-sheet">
+    <view class="result-sheet-mask" bindtap="closePlanRevision"></view>
+    <view class="result-sheet-panel plan-sheet-panel">
+      <view class="sheet-header">
+        <view>
+          <view class="eyebrow">REVISE PLAN</view>
+          <view class="sheet-title">修订任务计划</view>
+        </view>
+        <view class="sheet-close" bindtap="closePlanRevision">×</view>
+      </view>
+      <view class="sheet-note">可修改任务标题与负责人，关闭开关表示跳过该任务。保存后会写入 plan.revised 事件。</view>
+      <scroll-view scroll-y class="plan-scroll">
+        <view wx:for="{{planDraft}}" wx:key="id" class="plan-row">
+          <switch checked="{{item.enabled}}" data-index="{{index}}" bindchange="togglePlanTask" color="#3d7a52" />
+          <view class="plan-fields">
+            <input class="plan-title-input" data-index="{{index}}" data-field="title" value="{{item.title}}" placeholder="任务标题" bindinput="onPlanInput" />
+            <input class="plan-owner-input" data-index="{{index}}" data-field="owner" value="{{item.owner}}" placeholder="负责人" bindinput="onPlanInput" />
+          </view>
+        </view>
+      </scroll-view>
+      <button class="primary-button sheet-submit" loading="{{planSaving}}" disabled="{{planSaving}}" bindtap="submitPlanRevision">保存修订</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "new_year",
+    "input": "春节我和家人分散在不同城市，想一起回老家过年，安排交通、住宿、年货和家庭分工，预算6000元。",
+    "scenario": "new_year_reunion",
+    "mustKeepMissing": ["date", "origins"],
+    "mustIncludeTasks": ["跨城交通", "住宿", "年货采购", "预算", "家庭分工"]
+  },
+  {
+    "id": "moving",
+    "input": "我要在月底搬家，请帮我安排搬家公司、家具配送、水电和预算。",
+    "scenario": "moving_home",
+    "mustKeepMissing": ["date"],
+    "mustIncludeTasks": ["搬家公司", "家具与家电", "地址与水电"]
+  },
+  {
+    "id": "gathering",
+    "input": "周末组织6个朋友聚会，帮我安排餐厅、活动、交通和AA记账。",
+    "scenario": "friend_gathering",
+    "mustKeepMissing": ["date", "destination"],
+    "mustIncludeTasks": ["餐厅预约", "活动安排", "AA记账"]
+  },
+  {
+    "id": "family_affair",
+    "input": "帮我安排下周带父母去医院，包含预约、交通、材料和费用记录。",
+    "scenario": "generic_task",
+    "mustKeepMissing": ["date", "destination"],
+    "mustIncludeTasks": ["需要的服务", "时间安排", "预算", "成员分工"]
+  },
+  {
+    "id": "travel",
+    "input": "两个人想去杭州玩三天，请安排交通、酒店、景点和总预算。",
+    "scenario": "generic_task",
+    "mustKeepMissing": ["date"],
+    "mustIncludeTasks": ["需要的服务", "时间安排", "预算"]
+  },
+  {
+    "id": "budget_missing",
+    "input": "我想和家人回老家过年，帮我安排交通和住宿。",
+    "scenario": "new_year_reunion",
+    "mustKeepMissing": ["budgetLimit", "date", "origins"],
+    "mustIncludeTasks": ["跨城交通", "住宿"]
+  },
+  {
+    "id": "generic_project",
+    "input": "我要组织一个需要多人协作的社区活动，请拆分准备、服务和分工。",
+    "scenario": "generic_task",
+    "mustKeepMissing": ["date", "budgetLimit"],
+    "mustIncludeTasks": ["确认目标与约束", "需要的服务", "成员分工"]
+  },
+  {
+    "id": "zero_budget",
+    "input": "帮我整理一次免费线上分享会的任务和负责人，不设置预算。",
+    "scenario": "generic_task",
+    "mustKeepMissing": ["date"],
+    "mustIncludeTasks": ["成员分工"]
+  },
+  {
+    "id": "invalid_amount",
+    "input": "春节团聚预算是很多钱，交通和年货都要安排。",
+    "scenario": "new_year_reunion",
+    "mustKeepMissing": ["budgetLimit", "date"],
+    "mustIncludeTasks": ["跨城交通", "年货采购"]
+  },
+  {
+    "id": "empty_context",
+    "input": "帮我安排一些事情。",
+    "scenario": "generic_task",
+    "mustKeepMissing": ["date", "budgetLimit", "participants", "destination"],
+    "mustIncludeTasks": ["确认目标与约束", "成员分工"]
+  }
+]

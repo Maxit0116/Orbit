@@ -1,0 +1,17 @@
+---
+description: 本仓库是微信小程序，必须使用 wechatide-skill 驱动开发者工具
+alwaysApply: true
+---
+
+# WeChat IDE Skill
+
+本项目是微信小程序（`compileType: miniprogram`）。涉及模拟器、预览、上传、自动化、调试、云开发时，必须使用 `wechatide-skill`（v0.3.9）。
+
+- Skill 路径：`~/.cursor/skills/wechatide-skill/SKILL.md`（只读源：开发者工具安装目录内 `wechatide-skill`）
+- CLI：`wechatide -c Cursor <toolName> [flags...]`
+- **禁止在沙箱中运行 `wechatide`**，必须用非沙箱、可访问本机桌面的 shell
+- 会话首次调用前：`wechatide -c Cursor check_wechatide_status --skill-version 0.3.9`
+- 项目绝对路径：`/Users/terran/Projects/Orbit`
+- 工具名以 skill 的 `references/tool-index.md` 为准，勿编造
+
+按当前目标只进一个 scene（initializer / project-manager / compiler / previewer / automator / debugger / cloudbase-operator），不要跨 scene 混用原子工具。

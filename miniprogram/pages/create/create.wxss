@@ -1,0 +1,287 @@
+.create-screen {
+  padding-bottom: 96rpx;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 22rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  background: #fff;
+  color: var(--green-deep);
+  font-size: 36rpx;
+}
+
+.page-title {
+  margin-top: 16rpx;
+  font-size: 50rpx;
+  font-weight: 800;
+  letter-spacing: -2rpx;
+  line-height: 1.2;
+}
+
+.input-card {
+  margin-top: 44rpx;
+  padding: 28rpx;
+}
+
+.input-label {
+  color: var(--green);
+  font-size: 21rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+}
+
+.intent-input {
+  width: 100%;
+  min-height: 220rpx;
+  margin-top: 18rpx;
+  color: var(--ink);
+  font-size: 31rpx;
+  line-height: 1.6;
+}
+
+.intent-input .placeholder {
+  color: #a5b1aa;
+}
+
+.input-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18rpx;
+  border-top: 1rpx solid var(--line);
+  color: #a0aca4;
+  font-size: 21rpx;
+}
+
+.voice-hint {
+  color: var(--muted);
+}
+
+.examples {
+  margin-top: 30rpx;
+}
+
+.examples-label {
+  margin-bottom: 14rpx;
+  color: var(--muted);
+  font-size: 22rpx;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.generate-button {
+  margin-top: 28rpx;
+}
+
+.generate-button[disabled] {
+  opacity: 0.72;
+}
+
+.plan-panel {
+  margin-top: 64rpx;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.panel-title {
+  margin-top: 12rpx;
+  font-size: 36rpx;
+  font-weight: 800;
+}
+
+.intent-summary {
+  margin-top: 22rpx;
+  padding: 28rpx;
+}
+
+.summary-main {
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.summary-copy {
+  margin-top: 10rpx;
+  color: var(--muted);
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.summary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 26rpx;
+  padding-top: 22rpx;
+  border-top: 1rpx solid var(--line);
+}
+
+.meta-item {
+  width: 50%;
+  margin-bottom: 14rpx;
+  color: var(--ink);
+  font-size: 23rpx;
+}
+
+.editable-meta input {
+  width: 92%;
+  padding: 6rpx 0;
+  border-bottom: 1rpx solid var(--line);
+  color: var(--ink);
+  font-size: 23rpx;
+}
+
+.meta-key {
+  display: block;
+  margin-bottom: 4rpx;
+  color: var(--muted);
+  font-size: 20rpx;
+}
+
+.budget-value {
+  color: var(--orange);
+  font-weight: 800;
+}
+
+.editable-fields {
+  margin-top: 18rpx;
+  padding: 24rpx 28rpx;
+}
+
+.edit-row {
+  display: flex;
+  align-items: center;
+  min-height: 76rpx;
+  border-bottom: 1rpx solid var(--line);
+  color: var(--muted);
+  font-size: 22rpx;
+}
+
+.edit-row text {
+  width: 120rpx;
+}
+
+.edit-row input {
+  flex: 1;
+  color: var(--ink);
+  font-size: 24rpx;
+}
+
+.assumption-box {
+  margin-top: 18rpx;
+  padding: 24rpx 28rpx;
+  border-radius: 24rpx;
+  background: var(--orange-soft);
+  color: #754b2d;
+}
+
+.assumption-title {
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.assumption-item {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.assumption-dot {
+  flex: 0 0 auto;
+  width: 8rpx;
+  height: 8rpx;
+  margin: 12rpx 12rpx 0 2rpx;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.task-preview {
+  margin-top: 34rpx;
+}
+
+.task-preview-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.task-preview-row {
+  display: flex;
+  align-items: center;
+  min-height: 100rpx;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.task-preview-row.is-disabled {
+  opacity: 0.42;
+}
+
+.task-index {
+  width: 58rpx;
+  color: var(--orange);
+  font-family: Georgia, serif;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.task-preview-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-preview-title {
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.task-preview-type {
+  overflow: hidden;
+  margin-top: 6rpx;
+  color: var(--muted);
+  font-size: 20rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: 12rpx;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--green);
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.confirm-button {
+  margin-top: 36rpx;
+}
+
+.manual-button {
+  margin-top: 16rpx;
+}

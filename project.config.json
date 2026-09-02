@@ -1,0 +1,69 @@
+{
+  "description": "Orbit AI Task Workspace",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "cloudfunctions"
+      },
+      {
+        "type": "folder",
+        "value": "cloudbase"
+      },
+      {
+        "type": "folder",
+        "value": "docs"
+      },
+      {
+        "type": "folder",
+        "value": "scripts"
+      }
+    ],
+    "include": []
+  },
+  "watchOptions": {
+    "ignore": [
+      "cloudfunctions/**",
+      "cloudbase/**",
+      "docs/**",
+      "scripts/**",
+      ".cursor/**"
+    ]
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.17.2",
+  "appid": "wx88c4f0c87a9fa17f",
+  "projectname": "orbit-task-workspace",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": false,
+    "coverView": true,
+    "lazyCodeLoading": "requiredComponents",
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "condition": {},
+  "simulatorPluginLibVersion": {},
+  "editorSetting": {}
+}

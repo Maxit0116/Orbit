@@ -1,0 +1,139 @@
+page {
+  --ink: #1d2a24;
+  --muted: #718078;
+  --line: #dfe7df;
+  --surface: #ffffff;
+  --canvas: #f5f7f2;
+  --mint: #d9f3e2;
+  --green: #276749;
+  --green-deep: #174c37;
+  --orange: #e28b4c;
+  --orange-soft: #fff0df;
+  --purple: #8065b8;
+  --shadow: 0 16rpx 42rpx rgba(31, 56, 44, 0.08);
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", sans-serif;
+  font-size: 28rpx;
+}
+
+view,
+text,
+button,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  line-height: 1.4;
+}
+
+button::after {
+  border: 0;
+}
+
+.screen {
+  min-height: 100vh;
+  padding: 48rpx 40rpx 72rpx;
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 3rpx;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.card {
+  background: var(--surface);
+  border: 1rpx solid rgba(223, 231, 223, 0.9);
+  border-radius: 28rpx;
+  box-shadow: var(--shadow);
+}
+
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96rpx;
+  padding: 0 32rpx;
+  border-radius: 22rpx;
+  background: var(--green-deep);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 12rpx 28rpx rgba(23, 76, 55, 0.2);
+}
+
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 82rpx;
+  padding: 0 28rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  background: #fff;
+  color: var(--green-deep);
+  font-weight: 700;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 48rpx 0 20rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 800;
+  letter-spacing: -0.5rpx;
+}
+
+.section-action {
+  color: var(--green);
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 54rpx;
+  padding: 0 20rpx;
+  margin: 0 12rpx 12rpx 0;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  background: #fff;
+  color: var(--muted);
+  font-size: 24rpx;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44rpx;
+  padding: 0 16rpx;
+  border-radius: 999rpx;
+  background: var(--mint);
+  color: var(--green);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.status-pill.warning {
+  background: var(--orange-soft);
+  color: #ad6127;
+}
